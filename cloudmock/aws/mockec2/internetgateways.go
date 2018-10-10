@@ -116,11 +116,9 @@ func (m *MockEC2) DescribeInternetGateways(request *ec2.DescribeInternetGateways
 
 			case "attachment.vpc-id":
 				for _, v := range filter.Values {
-					if internetGateway.Attachments != nil {
-						for _, attachment := range internetGateway.Attachments {
-							if *attachment.VpcId == *v {
-								match = true
-							}
+					for _, attachment := range internetGateway.Attachments {
+						if *attachment.VpcId == *v {
+							match = true
 						}
 					}
 				}

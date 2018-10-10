@@ -82,10 +82,8 @@ func validateClusterSpec(spec *kops.ClusterSpec, fieldPath *field.Path) field.Er
 		allErrs = append(allErrs, validateHookSpec(&spec.Hooks[i], fieldPath.Child("hooks").Index(i))...)
 	}
 
-	if spec.FileAssets != nil {
-		for i, x := range spec.FileAssets {
-			allErrs = append(allErrs, validateFileAssetSpec(&x, fieldPath.Child("fileAssets").Index(i))...)
-		}
+	for i, x := range spec.FileAssets {
+		allErrs = append(allErrs, validateFileAssetSpec(&x, fieldPath.Child("fileAssets").Index(i))...)
 	}
 
 	if spec.KubeAPIServer != nil {
