@@ -115,14 +115,12 @@ func serializeFirewallAllowed(r *compute.FirewallAllowed) string {
 
 func (e *FirewallRule) mapToGCE(project string) (*compute.Firewall, error) {
 	var allowed []*compute.FirewallAllowed
-	if e.Allowed != nil {
-		for _, a := range e.Allowed {
-			p, err := parseFirewallAllowed(a)
-			if err != nil {
-				return nil, err
-			}
-			allowed = append(allowed, p)
+	for _, a := range e.Allowed {
+		p, err := parseFirewallAllowed(a)
+		if err != nil {
+			return nil, err
 		}
+		allowed = append(allowed, p)
 	}
 	firewall := &compute.Firewall{
 		Name:         *e.Name,
